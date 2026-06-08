@@ -39,6 +39,12 @@
 
   "openai_local_servers_hint": "Servidores locales: llama.cpp (8080), LM Studio (1234), vLLM, etc.",
 
+  "pdf_output_format_label": "Formato de salida PDF",
+  "pdf_output_format_help": "Los PDF se traducen en modo solo texto. Elija el formato de salida para trabajos PDF.",
+  "pdf_output_txt": "Texto plano (.txt)",
+  "pdf_output_md": "Markdown (.md)",
+  "pdf_output_docx": "Word (.docx)",
+
   "naming_convention_label": "Convención de nomenclatura",
   "naming_convention_input_title": "Usa {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} como variables",
   "naming_convention_help": "Variables: {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext}<br>Ejemplo: {originalName} ({targetLang}) ({model})_{date}.{ext}",

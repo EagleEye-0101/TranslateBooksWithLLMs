@@ -39,6 +39,12 @@
 
   "openai_local_servers_hint": "本地服务器：llama.cpp（8080）、LM Studio（1234）、vLLM 等。",
 
+  "pdf_output_format_label": "PDF 输出格式",
+  "pdf_output_format_help": "PDF 以纯文本模式翻译。请选择 PDF 任务的输出格式。",
+  "pdf_output_txt": "纯文本 (.txt)",
+  "pdf_output_md": "Markdown (.md)",
+  "pdf_output_docx": "Word (.docx)",
+
   "naming_convention_label": "命名规则",
   "naming_convention_input_title": "可使用 {originalName}、{targetLang}、{sourceLang}、{model}、{date}、{datetime}、{ext} 作为占位符",
   "naming_convention_help": "占位符：{originalName}、{targetLang}、{sourceLang}、{model}、{date}、{datetime}、{ext}<br>示例：{originalName} ({targetLang}) ({model})_{date}.{ext}",

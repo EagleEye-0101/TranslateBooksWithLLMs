@@ -17,6 +17,7 @@ from pathlib import Path
 from .generic_translator import GenericTranslator
 from .txt_adapter import TxtAdapter
 from .srt_adapter import SrtAdapter
+from .pdf_adapter import PdfAdapter
 from .epub_adapter import EpubAdapter
 from .exceptions import UnsupportedFormatError
 from src.utils.file_detector import detect_file_type, detect_file_type_by_content
@@ -238,13 +239,14 @@ async def translate_file(
     adapter_map = {
         'txt': TxtAdapter,
         'srt': SrtAdapter,
+        'pdf': PdfAdapter,
         # Note: 'epub' uses legacy path above
         # Note: 'docx' uses legacy path above
     }
 
     adapter_class = adapter_map.get(detected_type)
     if not adapter_class:
-        supported = ', '.join(['txt', 'srt', 'epub', 'docx'])
+        supported = ', '.join(['txt', 'srt', 'epub', 'docx', 'pdf'])
         raise UnsupportedFormatError(
             f"Unsupported file format: {detected_type}. Supported formats: {supported}"
         )
@@ -256,6 +258,7 @@ async def translate_file(
         'min_chunk_size': min_chunk_size,
         'max_tokens_per_chunk': max_tokens_per_chunk,
         'prompt_options': prompt_options,
+        'pdf_output_extension': additional_config.get('pdf_output_extension'),
         **additional_config
     }
 
@@ -317,6 +320,7 @@ def get_file_type_from_path(filepath: str) -> str:
         '.srt': 'srt',
         '.epub': 'epub',
         '.docx': 'docx',
+        '.pdf': 'pdf',
     }
 
     return type_map.get(ext, 'unknown')
@@ -369,6 +373,7 @@ async def build_translated_output(
         'txt': TxtAdapter,
         'srt': SrtAdapter,
         'epub': EpubAdapter,
+        'pdf': PdfAdapter,
         # Note: docx doesn't support checkpoint reconstruction yet
     }
 

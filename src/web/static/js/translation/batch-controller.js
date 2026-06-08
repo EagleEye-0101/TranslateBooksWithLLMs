@@ -113,7 +113,11 @@ function getTranslationConfig(file) {
         tts_bitrate: ttsEnabled ? (DomHelpers.getValue('ttsBitrate') || '64k') : '64k'
     };
 
-    if (file.fileType === 'epub' || file.fileType === 'srt') {
+    if (file.fileType === 'pdf' && file.pdfOutputFormat) {
+        config.pdf_output_extension = `.${file.pdfOutputFormat}`;
+    }
+
+    if (file.fileType === 'epub' || file.fileType === 'srt' || file.fileType === 'pdf') {
         config.file_path = file.filePath;
     } else {
         if (file.content) {

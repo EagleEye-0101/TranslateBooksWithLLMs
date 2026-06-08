@@ -435,6 +435,7 @@ async def perform_actual_translation(translation_id, config, state_manager, outp
                 auto_adjust_context=config.get('auto_adjust_context', True),
                 max_tokens_per_chunk=config.get('max_tokens_per_chunk'),
                 prompt_options=config.get('prompt_options', {}),
+                pdf_output_extension=config.get('pdf_output_extension'),
             )
         else:
             # The translate-phase callback advertises the two-phase workflow
@@ -467,7 +468,8 @@ async def perform_actual_translation(translation_id, config, state_manager, outp
                 max_tokens_per_chunk=config.get('max_tokens_per_chunk'),
                 prompt_options=config.get('prompt_options', {}),
                 bilingual_output=config.get('bilingual_output', False),
-                parallel_workers=config.get('parallel_workers', 1)
+                parallel_workers=config.get('parallel_workers', 1),
+                pdf_output_extension=config.get('pdf_output_extension'),
             )
 
             # Optional chained refinement pass on the translated output.

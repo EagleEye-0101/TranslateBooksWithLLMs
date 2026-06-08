@@ -10,7 +10,7 @@
 
 A desktop app that translates **books**, **subtitles**, and **documents** with AI - local or cloud. Drop a file, pick a language, get the result.
 
-**Formats:** EPUB, SRT, DOCX, TXT
+**Formats:** EPUB, SRT, DOCX, TXT, PDF (text-only → TXT/MD/DOCX)
 
 - **No size limit.** Process documents of any length - from a single page to thousand-page novels. The intelligent chunking system handles unlimited content while preserving context between segments.
 - **Perfect preservation.** Your documents come out exactly as they went in: EPUB formatting, styles, and structure remain intact. SRT timecodes stay perfectly synchronized. Every tag, every timestamp, every formatting detail is preserved.
@@ -219,6 +219,7 @@ See [docs/DOCKER.md](docs/DOCKER.md) for more options.
 | [docs/PROVIDERS.md](docs/PROVIDERS.md) | Detailed provider setup (Ollama, LM Studio, OpenRouter, OpenAI, Gemini) |
 | [docs/API_KEY_ROTATION.md](docs/API_KEY_ROTATION.md) | Use multiple API keys per provider with automatic failover on rate-limit |
 | [docs/NOTIFICATIONS.md](docs/NOTIFICATIONS.md) | Webhook notifications on completion (ntfy, gotify, Discord, Slack, custom) |
+| [docs/PDF_TEXT_MODE.md](docs/PDF_TEXT_MODE.md) | PDF text-only translation (output as TXT, Markdown, or DOCX) |
 | [docs/GLOSSARY.md](docs/GLOSSARY.md) | Force consistent term translations across a book (Web UI + CLI, auto-extract via NER) |
 | [docs/CLI.md](docs/CLI.md) | Complete CLI reference |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Problem solutions |

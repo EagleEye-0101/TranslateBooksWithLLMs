@@ -27,12 +27,12 @@ import uuid
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Translate a text, EPUB or SRT file using an LLM.",
+        description="Translate a text, EPUB, SRT, DOCX, or PDF file using an LLM.",
         epilog="Tip: any --*_api_key flag also accepts comma-separated keys "
                "(e.g. --gemini_api_key key1,key2,key3) for automatic rotation "
                "on HTTP 429 — useful to chain free-tier accounts.",
     )
-    parser.add_argument("-i", "--input", required=True, help="Path to the input file (text, EPUB, or SRT).")
+    parser.add_argument("-i", "--input", required=True, help="Path to the input file (text, EPUB, SRT, DOCX, or PDF).")
     parser.add_argument("-o", "--output", default=None, help="Path to the output file. If not specified, uses input filename with suffix.")
     parser.add_argument("-sl", "--source_lang", default=DEFAULT_SOURCE_LANGUAGE, help=f"Source language (default: {DEFAULT_SOURCE_LANGUAGE}).")
     parser.add_argument("-tl", "--target_lang", default=DEFAULT_TARGET_LANGUAGE, help=f"Target language (default: {DEFAULT_TARGET_LANGUAGE}).")
@@ -102,6 +102,8 @@ if __name__ == "__main__":
             output_ext = '.epub'
         elif args.input.lower().endswith('.srt'):
             output_ext = '.srt'
+        elif args.input.lower().endswith('.pdf'):
+            output_ext = '.md'
         if args.refine_only:
             args.output = f"{base} (refined){output_ext}"
         else:
@@ -115,8 +117,16 @@ if __name__ == "__main__":
         file_type = "EPUB"
     elif args.input.lower().endswith('.srt'):
         file_type = "SRT"
+    elif args.input.lower().endswith('.pdf'):
+        file_type = "PDF"
     else:
         file_type = "TEXT"
+
+    pdf_output_extension = None
+    if args.input.lower().endswith('.pdf'):
+        _, out_ext = os.path.splitext(args.output.lower())
+        if out_ext in ('.txt', '.md', '.docx'):
+            pdf_output_extension = out_ext
     
     # Setup unified logger
     logger = setup_cli_logger(enable_colors=not args.no_color)
@@ -241,6 +251,7 @@ if __name__ == "__main__":
                 poe_api_key=args.poe_api_key,
                 nim_api_key=args.nim_api_key,
                 prompt_options=prompt_options,
+                pdf_output_extension=pdf_output_extension,
             ))
             logger.info("Refine-Only Completed Successfully", LogType.TRANSLATION_END, {
                 'output_file': args.output,
@@ -268,7 +279,8 @@ if __name__ == "__main__":
                 poe_api_key=args.poe_api_key,
                 nim_api_key=args.nim_api_key,
                 prompt_options=prompt_options,
-                parallel_workers=args.parallel
+                parallel_workers=args.parallel,
+                pdf_output_extension=pdf_output_extension,
             ))
 
             logger.info("Translation Completed Successfully", LogType.TRANSLATION_END, {

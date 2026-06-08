@@ -98,6 +98,8 @@ function detectFileType(filename) {
 
     if (extension === 'epub') return 'epub';
     if (extension === 'srt') return 'srt';
+    if (extension === 'docx') return 'docx';
+    if (extension === 'pdf') return 'pdf';
     return 'txt';
 }
 
@@ -815,8 +817,15 @@ export const FileUpload = {
         // Get output filename pattern
         const outputPattern = DomHelpers.getValue('outputFilenamePattern') ||
                              "{originalName} ({targetLang}).{ext}";
-        const outputFilename = generateOutputFilename(file, outputPattern);
         const fileExtension = file.name.split('.').pop().toLowerCase();
+        let outputFilename;
+        if (fileExtension === 'pdf') {
+            const pdfFormat = DomHelpers.getValue('pdfOutputFormat') || 'md';
+            const pdfFile = { name: file.name.replace(/\.pdf$/i, `.${pdfFormat}`) };
+            outputFilename = generateOutputFilename(pdfFile, outputPattern);
+        } else {
+            outputFilename = generateOutputFilename(file, outputPattern);
+        }
 
         MessageLogger.showMessage(t('translation:file_uploading', { name: file.name }), 'info', 4000);
 
@@ -867,7 +876,10 @@ export const FileUpload = {
                 languageConfidence: uploadResult.language_confidence || null,
                 thumbnail: uploadResult.thumbnail || null,  // EPUB cover thumbnail
                 operation: operation,
-                refineAfter: false
+                refineAfter: false,
+                pdfOutputFormat: fileExtension === 'pdf'
+                    ? (DomHelpers.getValue('pdfOutputFormat') || 'md')
+                    : null,
             };
 
             // Add to state

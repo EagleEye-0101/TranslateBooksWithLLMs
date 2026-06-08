@@ -428,9 +428,9 @@
                         <span class="material-symbols-outlined">cloud_upload</span>
                     </div>
                     <h3 data-i18n="translation:drop_files_title">Drop files to translate</h3>
-                    <p data-i18n="translation:drop_files_support">Support for TXT, EPUB, SRT, and DOCX</p>
+                    <p data-i18n="translation:drop_files_support">Support for TXT, EPUB, SRT, DOCX, and PDF</p>
                     <div class="browse-btn" data-i18n="translation:browse_files">Browse Files</div>
-                    <input type="file" id="fileInput" accept=".txt,.epub,.srt,.docx" style="display: none;" onchange="handleFileSelect(event)" multiple>
+                    <input type="file" id="fileInput" accept=".txt,.epub,.srt,.docx,.pdf" style="display: none;" onchange="handleFileSelect(event)" multiple>
                 </div>
 
                 <!-- File Upload Area (Refine, secondary) -->
@@ -440,7 +440,7 @@
                     </div>
                     <h4 data-i18n="translation:drop_files_refine_title">Drop files to refine (already translated)</h4>
                     <p data-i18n="translation:drop_files_refine_support">Polish an existing translation — same language in, same language out</p>
-                    <input type="file" id="fileInputRefine" accept=".txt,.epub,.srt,.docx" style="display: none;" onchange="handleFileSelectRefine(event)" multiple>
+                    <input type="file" id="fileInputRefine" accept=".txt,.epub,.srt,.docx,.pdf" style="display: none;" onchange="handleFileSelectRefine(event)" multiple>
                 </div>
 
                 <!-- File Info Section (Batch Files) -->
@@ -666,7 +666,7 @@
                         <h3 data-i18n="sample:drop_file_title">Drop a book to sample</h3>
                         <p data-i18n="sample:drop_file_support">Support for TXT, EPUB, SRT, and DOCX</p>
                         <div class="browse-btn" data-i18n="translation:browse_files">Browse Files</div>
-                        <input type="file" id="sampleFileInput" accept=".txt,.epub,.srt,.docx" style="display: none;">
+                        <input type="file" id="sampleFileInput" accept=".txt,.epub,.srt,.docx,.pdf" style="display: none;">
                     </div>
 
                     <!-- Selected file card (replaces the dropzone visually once a file is picked) -->
@@ -897,6 +897,21 @@
                             </div>
                             <small data-i18n="settings:openai_local_servers_hint" style="color: var(--text-muted-light); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Local servers: llama.cpp (8080), LM Studio (1234), vLLM, etc.</small>
                         </div>
+                    </div>
+
+                    <!-- PDF output format (text-only mode) -->
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label data-i18n="settings:pdf_output_format_label">PDF output format</label>
+                        <div class="neu-inset-light">
+                            <select class="form-control" id="pdfOutputFormat">
+                                <option value="md" data-i18n="settings:pdf_output_md">Markdown (.md)</option>
+                                <option value="txt" data-i18n="settings:pdf_output_txt">Plain text (.txt)</option>
+                                <option value="docx" data-i18n="settings:pdf_output_docx">Word (.docx)</option>
+                            </select>
+                        </div>
+                        <small data-i18n="settings:pdf_output_format_help" style="color: var(--text-muted-light); font-size: 0.6875rem; margin-top: 0.5rem; display: block;">
+                            PDFs are translated in text-only mode. Choose the output format for translated PDF jobs.
+                        </small>
                     </div>
 
                     <!-- Output Filename Pattern -->
@@ -1601,7 +1616,7 @@
                     <p class="ner-modal-intro" data-i18n-html="glossary:ner_intro">
                         Pick a source file (TXT, SRT, EPUB, DOCX). The LLM will scan <strong id="ner-budget-label">6000</strong> characters drawn from <strong id="ner-samples-label">10</strong> evenly-spaced excerpts across the document, and propose recurring named entities. You'll review and edit each candidate before it joins the glossary.
                     </p>
-                    <input type="file" id="ner-file-input" accept=".txt,.srt,.epub,.docx" style="display: none;">
+                    <input type="file" id="ner-file-input" accept=".txt,.srt,.epub,.docx,.pdf" style="display: none;">
                     <div id="ner-drop-zone" class="glossary-ner-dropzone">
                         <div class="ner-dropzone-primary">
                             <button type="button" class="btn btn-secondary" id="ner-pick-file-btn">

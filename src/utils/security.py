@@ -38,7 +38,7 @@ class SecureFileHandler:
     # The system will detect the actual content type for unknown extensions
     ALLOWED_EXTENSIONS: Set[str] = {
         # Primary supported formats (with dedicated processors)
-        '.txt', '.epub', '.srt', '.docx',
+        '.txt', '.epub', '.srt', '.docx', '.pdf',
         # Common text file extensions (will be processed as plain text)
         '.text', '.log', '.md', '.markdown', '.rst', '.asc',
         # Configuration/data files (text-based, can be translated)
@@ -69,6 +69,7 @@ class SecureFileHandler:
         'application/x-subrip',  # SRT files
         'text/srt',  # Alternative MIME type for SRT
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',  # DOCX files
+        'application/pdf',
         # Additional text MIME types
         'text/markdown',
         'text/x-markdown',

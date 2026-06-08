@@ -18,6 +18,7 @@ from .generic_translator import GenericTranslator
 from .txt_adapter import TxtAdapter
 from .srt_adapter import SrtAdapter
 from .epub_adapter import EpubAdapter
+from .pdf_adapter import PdfAdapter
 
 # Unified translation entry point (Phase 6)
 from .translate_file import translate_file, get_file_type_from_path, build_translated_output
@@ -57,6 +58,7 @@ __all__ = [
     'TxtAdapter',
     'SrtAdapter',
     'EpubAdapter',
+    'PdfAdapter',
 
     # Unified translation entry point (Phase 6)
     'translate_file',

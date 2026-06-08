@@ -145,6 +145,32 @@ async def refine_file(
             prompt_options=prompt_options,
         )
 
+    if detected_type == 'pdf':
+        from src.core.refine.pdf_refiner import refine_pdf_file
+        return await refine_pdf_file(
+            input_filepath=input_filepath,
+            output_filepath=output_filepath,
+            target_language=target_language,
+            model_name=model_name,
+            cli_api_endpoint=llm_api_endpoint,
+            log_callback=log_callback,
+            stats_callback=stats_callback,
+            check_interruption_callback=check_interruption_callback,
+            llm_provider=llm_provider,
+            gemini_api_key=gemini_api_key,
+            openai_api_key=openai_api_key,
+            openrouter_api_key=openrouter_api_key,
+            mistral_api_key=mistral_api_key,
+            deepseek_api_key=deepseek_api_key,
+            poe_api_key=poe_api_key,
+            nim_api_key=nim_api_key,
+            context_window=context_window or 2048,
+            auto_adjust_context=auto_adjust_context,
+            max_tokens_per_chunk=max_tokens_per_chunk,
+            prompt_options=prompt_options,
+            pdf_output_extension=additional_config.get('pdf_output_extension'),
+        )
+
     if detected_type == 'srt':
         from src.core.refine.srt_refiner import refine_srt_file
         return await refine_srt_file(
@@ -167,7 +193,7 @@ async def refine_file(
             prompt_options=prompt_options,
         )
 
-    supported = ', '.join(['txt', 'epub', 'srt', 'docx'])
+    supported = ', '.join(['txt', 'epub', 'srt', 'docx', 'pdf'])
     raise UnsupportedFormatError(
         f"Unsupported file format for refine-only: {detected_type}. "
         f"Supported formats: {supported}"

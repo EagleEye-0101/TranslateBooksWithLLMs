@@ -39,6 +39,12 @@
 
   "openai_local_servers_hint": "로컬 서버: llama.cpp (8080), LM Studio (1234), vLLM 등.",
 
+  "pdf_output_format_label": "PDF 출력 형식",
+  "pdf_output_format_help": "PDF는 텍스트 전용 모드로 번역됩니다. PDF 작업의 출력 형식을 선택하세요.",
+  "pdf_output_txt": "일반 텍스트 (.txt)",
+  "pdf_output_md": "Markdown (.md)",
+  "pdf_output_docx": "Word (.docx)",
+
   "naming_convention_label": "파일명 규칙",
   "naming_convention_input_title": "{originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext}를 플레이스홀더로 사용",
   "naming_convention_help": "플레이스홀더: {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext}<br>예: {originalName} ({targetLang}) ({model})_{date}.{ext}",
